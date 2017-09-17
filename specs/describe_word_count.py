@@ -18,4 +18,6 @@ def describe_word_count():
         assert outcome == expected
 
     def does_not_count_stop_words():
-        pass
+        outcome = word_count("To be or not to be.")
+        expected = {}
+        assert outcome == expected

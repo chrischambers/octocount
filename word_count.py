@@ -1,9 +1,10 @@
 from collections import Counter
 from string import punctuation
 
+import nltk
 
-def filter_unwanted(wordlist):
-    return [word for word in wordlist if word != ""]
+nltk.download("stopwords")
+unwanted = set(nltk.corpus.stopwords.words()) | {""}
 
 
 def word_count(text):
@@ -11,4 +12,5 @@ def word_count(text):
         "".join([c for c in word if c not in punctuation]).lower()
         for word in text.split()
     ]
-    return Counter(filter_unwanted(lines))
+    lines = [word for word in lines if word not in unwanted]
+    return Counter(lines)
