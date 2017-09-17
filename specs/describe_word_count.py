@@ -24,3 +24,8 @@ def describe_word_count():
         outcome = word_count("To be or not to be.")
         expected = {}
         assert outcome == expected
+
+    def does_not_contain_numeric_values():
+        outcome = word_count("one one1 1one on999e 1 2 3 10 000 100")
+        expected = {'one': 1}
+        assert outcome == expected
