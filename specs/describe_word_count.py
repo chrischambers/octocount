@@ -8,10 +8,14 @@ def describe_word_count():
         assert outcome == expected
 
     def ignores_symbols():
-        pass
+        outcome = word_count("one, two. two? - (three) three three!!!")
+        expected = {'one': 1, 'two': 2, 'three': 3}
+        assert outcome == expected
 
     def is_case_insensitive():
-        pass
+        outcome = word_count("one TWO Two FoUr foUR fOur FouR")
+        expected = {'one': 1, 'two': 2, 'four': 4}
+        assert outcome == expected
 
     def does_not_count_stop_words():
         pass
