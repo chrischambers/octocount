@@ -7,9 +7,12 @@ def describe_word_count():
         expected = {'one': 1, 'two': 2, 'three': 3}
         assert outcome == expected
 
-    def ignores_symbols():
-        outcome = word_count("one, two. two? - (three) three three!!!")
-        expected = {'one': 1, 'two': 2, 'three': 3}
+    def ignores_symbols_at_word_ends():
+        outcome = word_count(
+            "one, two. two? - (three) three "
+            "three!!! double-barrelled"
+        )
+        expected = {'one': 1, 'two': 2, 'three': 3, "double-barrelled": 1}
         assert outcome == expected
 
     def is_case_insensitive():
