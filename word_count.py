@@ -9,7 +9,8 @@ unwanted = set(nltk.corpus.stopwords.words()) | {""}
 
 def desirable_word(word):
     """
-    True if the word does not contain numbers and is not a stop-word.
+    True if the word does not contain numbers, is a non-empty string, and is
+    not a stop-word.
     """
     return (word not in unwanted) and not [c for c in word if c in digits]
 
