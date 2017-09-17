@@ -1,15 +1,7 @@
 from bs4 import BeautifulSoup
+from functools import reduce
+from operator import add
 import cgi
-import re
-
-
-def visible_elements(element):
-    technical_details = ['style', 'link', 'script', '[document]', 'head', 'title']
-    if element.parent.name in technical_details:
-        return False
-    elif re.match('<!--.*-->', str(element.encode('utf-8'))):
-        return False
-    return True
 
 
 def get_response_charset(response, default='utf-8'):
@@ -26,8 +18,9 @@ def response_to_text(response):
 def extract_visible_words(response):
     text = response_to_text(response)
     soup = BeautifulSoup(text, "html.parser")
-    data = soup.findAll(text=True)
-    return filter(visible_elements, data)
+    for script in soup(["script", "style"]):
+        script.extract()
+    return reduce(add, (l.split() for l in soup.stripped_strings))
 
 
 def normalize(lower_bound, upper_bound, dataset):

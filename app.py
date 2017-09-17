@@ -22,9 +22,8 @@ class Index(web.RequestHandler):
             try:
                 response = client.fetch(url)
                 context["url"] = url
-                context['word_cloud'] = word_cloud(word_count(" ".join(
-                    extract_visible_words(response))
-                ))
+                context['word_cloud'] = word_cloud(word_count(
+                    extract_visible_words(response)))
             except HTTPError as e:
                 pass
         self.render("index.html", **context)
