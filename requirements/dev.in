@@ -1,0 +1,8 @@
+-r base.txt
+
+flake8
+ipython
+isort
+pytest
+pytest-describe
+-e git+git@github.com:chrischambers/pytest-spec.git@6a4eecf480d2e05719cab644fd555a9af224995b#egg=pytest_spec

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from tornado import web
-from tornado.ioloop import IOLoop
+from tornado import web, wsgi
+from wsgiref.simple_server import make_server
 
 
 class Index(web.RequestHandler):
@@ -10,9 +10,11 @@ class Index(web.RequestHandler):
         self.write("Hello World!")
 
 
+app = web.Application([
+    (r'/', Index),
+])
+application = wsgi.WSGIAdapter(app)
+
 if __name__ == '__main__':
-    app = web.Application([
-        (r'/', Index),
-    ])
-    app.listen(8888)
-    IOLoop.current().start()
+    with make_server('', 8888, application) as server:
+        server.serve_forever()
