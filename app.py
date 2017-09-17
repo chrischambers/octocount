@@ -21,16 +21,17 @@ class Index(web.RequestHandler):
         client = HTTPClient()
         context = {"url": "", "word_cloud": "", "error": ""}
         url = self.get_query_argument("url", None)
-        if not validators.url(url):
-            context['error'] = "'{}' is an invalid URL!".format(url)
-        else:
-            try:
-                response = client.fetch(url)
-                context["url"] = url
-                context['word_cloud'] = word_cloud(word_count(
-                    extract_visible_words(response)))
-            except HTTPError as e:
-                context['error'] = "I cannot access that URL"
+        if url:
+            if not validators.url(url):
+                context['error'] = "'{}' is an invalid URL!".format(url)
+            else:
+                try:
+                    response = client.fetch(url)
+                    context["url"] = url
+                    context['word_cloud'] = word_cloud(word_count(
+                        extract_visible_words(response)))
+                except HTTPError as e:
+                    context['error'] = "I cannot access that URL"
         self.render("index.html", **context)
 
 
