@@ -67,8 +67,15 @@
         </div>
           <button type="submit" class="btn btn-primary">Submit</button>
       </form>
-        <h2>{{ url }}</h2>
-        <h2>{{ response }}</h2>
+
+      <hr />
+
+        <h2>Word cloud for {{ url }}:</h2>
+        <section class="word-cloud">
+        {% for word, font_size in word_cloud %}
+        <span style="font-size: {{ font_size }}em">{{ word }}</span>
+        {% end %}
+      </section>
     </div><!-- .container -->
 
       <hr>

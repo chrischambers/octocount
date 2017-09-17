@@ -6,6 +6,7 @@ from tornado import web, wsgi
 from tornado.httpclient import HTTPClient, HTTPError
 from utils import extract_visible_words
 from word_count import word_count
+from word_cloud import word_cloud
 from wsgiref.simple_server import make_server
 
 project_directory = abspath(dirname(__file__))
@@ -15,14 +16,14 @@ class Index(web.RequestHandler):
 
     def get(self):
         client = HTTPClient()
-        context = {"url": "", "response": ""}
+        context = {"url": "", "word_cloud": ""}
         url = self.get_query_argument("url", None)
         if url:
             try:
                 response = client.fetch(url)
                 context["url"] = url
-                context['response'] = word_count(" ".join(
-                    extract_visible_words(response)
+                context['word_cloud'] = word_cloud(word_count(" ".join(
+                    extract_visible_words(response))
                 ))
             except HTTPError as e:
                 pass

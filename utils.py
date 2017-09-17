@@ -28,3 +28,16 @@ def extract_visible_words(response):
     soup = BeautifulSoup(text, "html.parser")
     data = soup.findAll(text=True)
     return filter(visible_elements, data)
+
+
+def normalize(lower_bound, upper_bound, dataset):
+    """
+    Normalises values in dataset from lower_bound to upper_bound.
+    """
+    maximum, minimum = max(dataset), min(dataset)
+    diff = maximum - minimum
+    bounds = upper_bound - lower_bound
+
+    def f(x):
+        return (bounds * (x - minimum) / diff) + lower_bound
+    return map(f, dataset)
