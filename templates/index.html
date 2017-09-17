@@ -46,6 +46,13 @@
 
       <p>Give me a URL, and I'll count the words and give you a word cloud.</p>
       <p>It's that simple!</p>
+
+      {% if error %}
+      <section class="errors alert alert-danger" role="alert">
+        <p>{{ error }}</p>
+      </section>
+      {% end %}
+
       <form>
         <div class="form-group">
           <label for="url">URL</label>
@@ -56,6 +63,7 @@
 
       <hr />
 
+      {% if url %}
       <h2>Word cloud for {{ url }}:</h2>
 
       <section class="word-cloud">
@@ -63,6 +71,7 @@
         <span style="font-size: {{ font_size }}em">{{ word }}</span>
         {% end %}
       </section>
+      {% end %}
     </div><!-- .container -->
 
     <hr>

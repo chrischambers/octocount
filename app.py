@@ -8,6 +8,7 @@ from utils import extract_visible_words
 from word_count import word_count
 from word_cloud import word_cloud
 from wsgiref.simple_server import make_server
+import validators
 
 project_directory = abspath(dirname(__file__))
 
@@ -16,16 +17,18 @@ class Index(web.RequestHandler):
 
     def get(self):
         client = HTTPClient()
-        context = {"url": "", "word_cloud": ""}
+        context = {"url": "", "word_cloud": "", "error": ""}
         url = self.get_query_argument("url", None)
-        if url:
+        if not validators.url(url):
+            context['error'] = "'{}' is an invalid URL!".format(url)
+        else:
             try:
                 response = client.fetch(url)
                 context["url"] = url
                 context['word_cloud'] = word_cloud(word_count(
                     extract_visible_words(response)))
             except HTTPError as e:
-                pass
+                context['error'] = "I cannot access that URL"
         self.render("index.html", **context)
 
 
