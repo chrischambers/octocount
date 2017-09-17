@@ -5,6 +5,7 @@
 #    pip-compile --output-file requirements/dev.txt requirements/dev.in
 #
 -e git+git@github.com:chrischambers/pytest-spec.git@6a4eecf480d2e05719cab644fd555a9af224995b#egg=pytest_spec
+beautifulsoup4==4.6.0
 click==6.7
 decorator==4.1.2          # via ipython, traitlets
 first==2.0.1
@@ -29,7 +30,7 @@ pygments==2.2.0           # via ipython
 pytest-describe==0.11.0
 pytest==3.2.2
 simplegeneric==0.8.1      # via ipython
-six==1.10.0
+six==1.11.0
 tornado==4.5.2
 traitlets==4.3.2          # via ipython
 wcwidth==0.1.7            # via prompt-toolkit
