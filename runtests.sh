@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 main() {
-    python -m pytest
+    python -m pytest "$@"
 }
 
-main
+main "$@"
