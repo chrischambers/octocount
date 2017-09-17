@@ -1,1 +1,1 @@
-requirements/base.txt
+requirements/prod.txt
