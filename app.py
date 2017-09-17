@@ -2,13 +2,15 @@
 # encoding: utf-8
 
 from os.path import abspath, dirname, join
+from wsgiref.simple_server import make_server
+
 from tornado import web, wsgi
 from tornado.httpclient import HTTPClient, HTTPError
-from utils import extract_visible_words
-from word_count import word_count
-from word_cloud import word_cloud
-from wsgiref.simple_server import make_server
+
 import validators
+from utils import extract_visible_words
+from word_cloud import word_cloud
+from word_count import word_count
 
 project_directory = abspath(dirname(__file__))
 

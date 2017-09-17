@@ -1,5 +1,5 @@
 from collections import Counter
-from string import punctuation, digits
+from string import digits, punctuation
 
 import nltk
 

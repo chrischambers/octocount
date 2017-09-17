@@ -1,7 +1,8 @@
-from bs4 import BeautifulSoup
+import cgi
 from functools import reduce
 from operator import add
-import cgi
+
+from bs4 import BeautifulSoup
 
 
 def get_response_charset(response, default='utf-8'):
